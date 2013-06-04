@@ -15,8 +15,8 @@
 // GPlv3 (https://gnu.org/licenses/gpl.html)
 ;(function($){
 	var defaults = {
-		validateOn: 'keyup',
-		formatOn: 'keyup'
+		validateOn: 'blur',
+		formatOn: 'blur'
 	};
 
 	//private methods
