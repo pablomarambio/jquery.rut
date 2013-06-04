@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jquery.rut</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="jquery.rut">
+    <meta name="author" content="Pablo Marambio Cathalifaud">
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="hero-unit">
+        <h1>Demos de jQuery.rut</h1>
+        <p>Abajo encontrarás diversos ejemplos de cómo usar jquery.rut</p>
+        <p><a href="https://github.com/pablomarambio/jquery.rut" class="btn btn-primary btn-large">Visitar en Github</a></p>
+      </div>
+
+      <div class="row">
+        <div class="span6">
+          <h2>Ejemplo simple</h2>
+          <p>Este campo de texto tiene activada la funcionalidad sin ninguna opción especial</p>
+          <form id="basico" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">RUT</label>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1" />
+              </div>
+            </div>
+          </form>
+          <pre>$("form#basico input").rut();</pre>
+        </div>
+        <div class="span6">
+          <h2>Formato en vivo</h2>
+          <p>En este caso, el plugin fue configurado para formatear a medida que el usuario va escribiendo</p>
+          <form id="formato-live" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">RUT</label>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1" />
+              </div>
+            </div>
+          </form>
+          <pre>$("form#formato-live input").rut({formatOn: 'keyup'});</pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span6">
+          <h2>Validación y formateo en vivo</h2>
+          <p>En este caso, el plugin fue configurado para formatear y validar a medida que el usuario va escribiendo. Cuando el rut está erróneo, el campo se muestra en rojo (gracias a los estilos de Bootstrap)</p>
+          <form id="validacion-live" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">RUT</label>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1" />
+                <span class="help-inline">RUT Chileno</span>
+              </div>
+            </div>
+          </form>
+          <pre>$("form#validacion-live input")
+  .rut({formatOn: 'keyup', validateOn: 'keyup'})
+  .on('rutInvalido', function(){ 
+    $(this).parents(".control-group").addClass("error")
+  })
+  .on('rutValido', function(){ 
+    $(this).parents(".control-group").removeClass("error")
+  });</pre>
+        </div>
+        <div class="span6">
+          <h2>Limpiar RUT</h2>
+          <p>Cuando el RUT es válido, se extrae su cuerpo sin DV y sin formato</p>
+          <form id="extraer-cuerpo" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">RUT</label>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1" />
+              </div>
+            </div>
+          </form>
+          <pre>$("form#extraer-cuerpo input").rut()
+  .on('rutValido', function(e, rut){
+    alert("Su RUT sin DV es " + rut);
+  });</pre>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Pablo Marambio Cathalifaud 2013</p>
+      </footer>
+
+    </div> <!-- /container -->
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="jquery.rut.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $("form#basico input").rut();
+        $("form#formato-live input").rut({formatOn: 'keyup'});
+        $("form#validacion-live input").rut({formatOn: 'keyup', validateOn: 'keyup'}).on('rutInvalido', function(){ $(this).parents(".control-group").addClass("error")}).on('rutValido', function(){ $(this).parents(".control-group").removeClass("error")});
+        $("form#extraer-cuerpo input").rut().on('rutValido', function(e, rut){alert("Su RUT sin DV es " + rut);});
+      });
+    </script>
+
+  </body>
+</html>

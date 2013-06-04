@@ -1,6 +1,6 @@
 ## jQuery.rut
 
-Plugin de jQuery para formateo y validación de RUTs. Este pfunciona sobre un input de tipo texto.
+Plugin de jQuery para formateo y validación de RUTs. Este plugin funciona sobre un input de tipo texto.
 
 ### Licencia
 
