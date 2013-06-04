@@ -16,6 +16,8 @@ Plugin de jQuery para formateo y validación de RUTs. Este plugin funciona sobre
 
 ### Uso
 
+**Ejemplos.** Para probar la funcionalidad, descarga `jquery.rut.js` y `demo.html` en una misma carpeta y abre `demo.html`en un browser.
+
 **General.** Para activar la funcionalidad, basta invocar el método `.rut()` en objeto jQuery
 
 ```javascript
