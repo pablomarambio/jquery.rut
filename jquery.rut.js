@@ -1,18 +1,21 @@
-// (c) 2013 Pablo Marambio Cathalifaud
-// Todos los derechos reservados
-// https://github.com/pablomarambio/jquery.rut
+//			jquery.rut plugin: validación y formateo de RUT
+//			Copyright (C) 2013  Pablo Marambio Cathalifaud
 
+//			This program is free software: you can redistribute it and/or modify
+//			it under the terms of the GNU General Public License as published by
+//			the Free Software Foundation, either version 3 of the License, or
+//			(at your option) any later version.
 
-// Licencia de uso
-// ---------------
-//
-// (1) Este código puede ser usado con fines comerciales 
-// a un valor de USD 25 por 1 año o USD 100 por 100 años.
-// (2) Instituciones sin fines de lucro y personas
-// naturales pueden usarlo sin costo alguno siempre
-// que sea para fines educativos o pruebas. En este
-// segundo caso, el código estará regido por la licencia
-// GPlv3 (https://gnu.org/licenses/gpl.html)
+//			This program is distributed in the hope that it will be useful,
+//			but WITHOUT ANY WARRANTY; without even the implied warranty of
+//			MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//			GNU General Public License for more details.
+
+//			You should have received a copy of the GNU General Public License
+//			along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+//			Para obtener este programa bajo la licencia MIT, póngase en contacto
+//			con @pablomarambio en Twitter.
 ;(function($){
 	var defaults = {
 		validateOn: 'blur',

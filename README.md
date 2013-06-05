@@ -4,9 +4,9 @@ Plugin de jQuery para formateo y validación de RUTs. Este plugin funciona sobre
 
 ### Licencia
 
-1. Este código está a la venta para ser usado para fines comerciales. El valor es de USD 50 por 1 año o USD 100 por 100 años. Para pagar la licencia comercial póngase en contacto con @pablomarambio en Twitter.
+1. Este plugin y todo el código contenido en este repositorio está regido por la licencia GPLv3 (https://gnu.org/licenses/gpl.html). **Nota:** Esto significa que **no puede ser usado, ni siquiera como librería, por programas de código cerrado**.
 
-2. Instituciones sin fines de lucro y personas naturales pueden usarlo sin costo alguno siempre que sea para fines educativos, pruebas o beneficencia. En este caso, el código estará regido por la licencia GPlv3 (https://gnu.org/licenses/gpl.html)
+2. Este plugin también está a la venta bajo la licencia MIT. El valor es de `USD 1000`. Para comprar esa licencia, póngase en contacto con @pablomarambio en Twitter.
 
 ### Requisitos y limitaciones
 
