@@ -4,9 +4,9 @@ Plugin de jQuery para formateo y validación de RUTs. Este plugin funciona sobre
 
 ### Licencia
 
-1. Este plugin y todo el código contenido en este repositorio está regido por la licencia AGPLv3 (http://www.gnu.org/licenses/agpl-3.0.html). **Nota:** Esto significa que este plugin **no puede ser usado -ni siquiera como librería- por programas de código cerrado**.
+1. Este plugin y todo el código contenido en este repositorio está regido por la licencia MIT 
 
-2. Este plugin también está a la venta bajo la licencia MIT. El valor es de `USD 1000`. Para comprar esa licencia, póngase en contacto con @pablomarambio en Twitter.
+2. Este plugin también está a la venta bajo otras licencias. Para consultas, póngase en contacto con @pablomarambio en Twitter.
 
 ### Requisitos y limitaciones
 
