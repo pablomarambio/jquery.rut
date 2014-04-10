@@ -35,6 +35,10 @@ $("input#rut").rut({
 	formatOn: 'keyup',
 	validateOn: 'change' // si no se quiere validar, pasar null
 });
+
+// Es posible pasar varios eventos separados por espacio, útil
+// para validar el rut aún cuando el browser autocomplete el campo
+$("input#rut").rut({validateOn: 'change keyup'});
 ```
 
 **Eventos.** Cuando el plugin valida el RUT, gatilla uno de dos eventos: `rutValido` y `rutInvalido`. La página puede responder a estos eventos de la manera que encuentre apropiada. Por ejemplo,
