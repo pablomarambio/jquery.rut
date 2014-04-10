@@ -95,6 +95,28 @@
   });</pre>
         </div>
       </div>
+      <div class="row">
+        <div class="span6">
+          <h2>Varios eventos</h2>
+          <p>El plugin utiliza la función <a href="https://api.jquery.com/on/">on</a> de jQuery, lo que permite pasar una lista de eventos separados por espacio. Esto es útil si se quiere validar el campo tanto a medida que el usuario escribe, como si se autocompleta.</p>
+          <form id="multiple-events" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="inputEmail">RUT</label>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1" />
+                <span class="help-inline">RUT Chileno</span>
+              </div>
+            </div>
+          </form>
+          <pre>$("form#multiple-events input")
+  .rut({validateOn: 'keyup change'})
+  .on('rutInvalido', function(){ 
+    $(this).parents(".control-group").addClass("error")
+  })
+  .on('rutValido', function(){ 
+    $(this).parents(".control-group").removeClass("error")
+  });</pre>
+        </div>
 
       <hr>
 
@@ -113,6 +135,7 @@
         $("form#formato-live input").rut({formatOn: 'keyup'});
         $("form#validacion-live input").rut({formatOn: 'keyup', validateOn: 'keyup'}).on('rutInvalido', function(){ $(this).parents(".control-group").addClass("error")}).on('rutValido', function(){ $(this).parents(".control-group").removeClass("error")});
         $("form#extraer-cuerpo input").rut().on('rutValido', function(e, rut){alert("Su RUT sin DV es " + rut);});
+        $("form#multiple-events input").rut({validateOn: 'keyup change'}).on('rutInvalido', function(){ $(this).parents(".control-group").addClass("error") }).on('rutValido', function(){ $(this).parents(".control-group").removeClass("error") });
       });
     </script>
 
