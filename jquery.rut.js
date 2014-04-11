@@ -21,7 +21,8 @@
 ;(function($){
 	var defaults = {
 		validateOn: 'blur',
-		formatOn: 'blur'
+		formatOn: 'blur',
+		ignoreControlKeys: true
 	};
 
 	//private methods
@@ -39,8 +40,21 @@
 		}
 		return cRut + rutF + "-" + cDv;
 	};
-	function isValidKey(key) {
-		return /[0-9Kk]/.exec(key);
+	function isControlKey(e) {
+		return e.type && e.type.match(/^key(up|down|press)/) &&
+			(
+				e.keyCode ==  8 || // del
+				e.keyCode == 16 || // shift
+				e.keyCode == 17 || // ctrl
+				e.keyCode == 18 || // alt
+				e.keyCode == 20 || // caps lock
+				e.keyCode == 27 || // esc
+				e.keyCode == 37 || // arrow
+				e.keyCode == 38 || // arrow
+				e.keyCode == 39 || // arrow
+				e.keyCode == 40 || // arrow
+				e.keyCode == 91    // command
+			);
 	};
 	function isValidRut(rut) {
 		if(typeof(rut) !== 'string') return false;
@@ -66,8 +80,15 @@
 			default	: return 11 - (suma % 11);
 		}
 	};
-	function formatInput($input) {
+	function formatInput($input, e) {
 		$input.val(format($input.val()));
+	};
+	function validateInput($input, e) {
+		if(isValidRut($input.val())) {
+			$input.trigger('rutValido', splitRutAndDv($input.val()));
+		} else {
+			$input.trigger('rutInvalido');
+		}
 	};
 	function splitRutAndDv(rut) {
 		var cValue = clearFormat(rut);
@@ -82,16 +103,13 @@
 	var methods = {
 		init: function(options) {
 			var that = this;
-			this.opts = $.extend({}, defaults, options);
-			this.opts.formatOn && this.on(this.opts.formatOn, function(e) { 
-				formatInput(that);
+			that.opts = $.extend({}, defaults, options);
+			that.opts.formatOn && that.on(that.opts.formatOn, function(e) { 
+				if(that.opts.ignoreControlKeys && isControlKey(e)) return;
+				formatInput(that, e);
 			});
-			that.opts.validateOn && this.on(that.opts.validateOn, function(e) { 
-				if(isValidRut(that.val())) {
-					that.trigger('rutValido', splitRutAndDv(that.val()));
-				} else {
-					that.trigger('rutInvalido');
-				}
+			that.opts.validateOn && that.on(that.opts.validateOn, function(e) { 
+				validateInput(that, e);
 			});
 			return this;
 		}

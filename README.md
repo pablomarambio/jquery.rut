@@ -41,6 +41,15 @@ $("input#rut").rut({
 $("input#rut").rut({validateOn: 'change keyup'});
 ```
 
+**Teclas omitidas.** Si se formatea en `keyup`, `keydown` o `keypress`, el sistema omite las teclas de control: flechas, borrar, shift, etc. Si no se quiere omitir esas teclas, usar la opción `ignoreControlKeys: false`.
+
+La opción `ignoreControlKeys: false` **no** afecta la validación del RUT.
+
+```javascript
+// El sistema formateará el RUT incluso cuando se presionen teclas de control
+$("input#rut").rut({formatOn: 'keyup', ignoreControlKeys: false});
+```
+
 **Eventos.** Cuando el plugin valida el RUT, gatilla uno de dos eventos: `rutValido` y `rutInvalido`. La página puede responder a estos eventos de la manera que encuentre apropiada. Por ejemplo,
 
 ```javascript
