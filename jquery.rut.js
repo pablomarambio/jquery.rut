@@ -72,7 +72,7 @@
 		rut = rut.toString();
 		for(var i=rut.length -1;i >= 0;i--) {
 			suma = suma + rut.charAt(i) * mul;
-			mul = ( mul + 1 ) % 8 || 2;
+			mul = ( mul + 1 ) % 8 || 2;
 		}
 		switch(suma % 11) {
 			case 1	: return 'k';
