@@ -36,7 +36,7 @@ $("input#rut").rut({
 	validateOn: 'change' // si no se quiere validar, pasar null
 });
 
-// Es posible pasar varios eventos separados por espacio, útil
+// es posible pasar varios eventos separados por espacio, útil
 // para validar el rut aún cuando el browser autocomplete el campo
 $("input#rut").rut({validateOn: 'change keyup'});
 ```
@@ -69,27 +69,28 @@ $("input#rut").rut().on('rutValido', function(e, rut, dv) {
 
 Notar que cuando el rut es válido, la función recibe dos argumentos adicionales, el RUT y el dígito verificador. En este caso, el RUT no vendrá formateado.
 
-### Uso sin input
+### Uso con string
 
-También es posible formatear y validar strings que contienen RUTs.
+También es posible formatear y validar strings que contienen un RUT.
 
 **Formateo.** Invocar la función `formatRut`, la que recibe el RUT a formatear.
 
 ```javascript
 var rut = "145694841";
-$.formatRut(rut); #=> "14.569.484-1";
+$.formatRut(rut); // => "14.569.484-1";
 ```
 
 **Validación.** Invocar la función `validateRut`, la que recibe el RUT a testear y, opcionalmente, una función para procesar el rut separado de su dígito verificador.
 
 ```javascript
 var rut = "145694841";
+// retorna true si es válido
 if($.validateRut(rut)) {
 	alert("El rut es válido!");
 }
-//Usando un callback para recibir el RUT dividido en partes
+// callback para recibir el RUT dividido en partes
 $.formatRut(rut, function(rut, dv) {
-	//Sólo se invoca si el RUT es válido
+	// esta función sólo se invoca si el RUT es válido
 	alert("El RUT es " + rut +  "y el DV es " + dv);
 });
 ```
