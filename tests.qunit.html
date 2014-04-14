@@ -8,6 +8,7 @@
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
+  <script src="lib/syn.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="jquery.rut.js"></script>
   <script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
@@ -17,10 +18,12 @@
     var invalidOriginal = "14569484K";
     var invalidFormateado = "14.569.484-K";
     var textbox = function(val) {
-      return $("<input type='text' id='format-blur' placeholder='14.569.484-1' value='" + val + "' />");
+      return $("<input type='text' id='test' placeholder='14.569.484-1' value='" + val + "' />");
     }
     module("pre");
     test( "plugin loading", function() {
+      ok($, "Existe jquery" );
+      ok(Syn, "Existe Syn" );
       ok($.isFunction($("#format-blur").rut), "Existe la función $('...').rut()" );
       ok($.isFunction($.formatRut), "Existe la función jQuery.formatRut()" );
       ok($.isFunction($.validateRut), "Existe la función jQuery.validateRut()" );
@@ -109,6 +112,55 @@
         equal(dv, "1", "El dv fue retornado");
       });
       $("input", fxtr).triggerHandler("blur");
+    });
+    module("keyup");
+    asyncTest( "format-invalid", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textbox(""));
+      var formatsIncluded = [];
+      var formats = ["", "1", "1-4", "14-5", "145-6"];
+      $("input", fxtr).rut({formatOn: 'keyup'}).on("keydown", function(e){
+        formatsIncluded.push($(this).val());
+        ok(formats.indexOf($(this).val()) >= 0, "Tecla [" + (e.keyCode >= 48 && e.keyCode <= 57 ? e.keyCode-48 : e.keyCode) + "]; formato anterior ['" + $(this).val() + "'] (remaining " + formats + ")");
+        formats.splice(formats.indexOf($(this).val()), 1);
+        if(formats.length == 0) { 
+          start();
+          equal(0, formats.length, "RUT formateado correctamente para: " + formatsIncluded);
+        }
+      });
+      Syn.type("14569", 'test');
+    });
+    asyncTest( "format-valid", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textbox(""));
+      var formatsIncluded = [];
+      var formats = ["", "1", "1-5", "15-7", "157-7"];
+      $("input", fxtr).rut({formatOn: 'keyup'}).on("keydown", function(e){
+        formatsIncluded.push($(this).val());
+        ok(formats.indexOf($(this).val()) >= 0, "Tecla [" + (e.keyCode >= 48 && e.keyCode <= 57 ? e.keyCode-48 : e.keyCode) + "]; formato anterior ['" + $(this).val() + "'] (remaining " + formats + ")");
+        formats.splice(formats.indexOf($(this).val()), 1);
+        if(formats.length == 0) { 
+          start();
+          equal(0, formats.length, "RUT formateado correctamente para: " + formatsIncluded);
+        }
+      });
+      Syn.type("15776", 'test');
+    });
+    asyncTest( "format-control-keys-ignored", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textbox(""));
+      var formatsIncluded = [];
+      var formats = ["", "1", "1-5", "15-7", "157-a", "1.57a-6", "1.57a-6", "1.57a-6", "1.57-6"];
+      $("input", fxtr).rut({formatOn: 'keyup'}).on("keydown", function(e){
+        formatsIncluded.push($(this).val());
+        ok(formats.indexOf($(this).val()) >= 0, "Tecla [" + (e.keyCode >= 48 && e.keyCode <= 57 ? e.keyCode-48 : e.keyCode) + "]; formato anterior ['" + $(this).val() + "'] (remaining " + formats + ")");
+        formats.splice(formats.indexOf($(this).val()), 1);
+        if(formats.length == 0) { 
+          start();
+          equal(0, formats.length, "RUT formateado correctamente para: " + formatsIncluded);
+        }
+      });
+      Syn.type("157a6[left][left][backspace]7", 'test');
     });
   </script>
 </body>

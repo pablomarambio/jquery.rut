@@ -26,7 +26,9 @@ Plugin de jQuery para formateo y validación de RUTs.
 $("input#rut").rut();
 ```
 
-**Formateo y validación.** Por omisión, el plugin formatea cuando se gatilla el evento 'blur' del input, esto es, cuando pierde foco. Para formatear o validar en otro evento, el plugin debe invocarse con un valor distinto de `'blur'` para las opciones `'formatOn'` y `'validateOn'`:
+**Formateo y validación.** Por omisión, el plugin formatea cuando se gatilla el evento 'blur' del input, esto es, cuando pierde foco. Para formatear o validar en otro evento, el plugin debe invocarse con un valor distinto de `'blur'` para las opciones `'formatOn'` y `'validateOn'`. 
+
+*Importante: Sólo se ha testeado para los eventos `'blur'` y `'keyup'`. Además, se sabe que el formato no funcionará en `'keypress'`*
 
 ```javascript
 // formateará el RUT cada vez que se escriba en el campo y
@@ -41,7 +43,7 @@ $("input#rut").rut({
 $("input#rut").rut({validateOn: 'change keyup'});
 ```
 
-**Teclas omitidas.** Si se formatea en `keyup`, `keydown` o `keypress`, el sistema omite las teclas de control: flechas, borrar, shift, etc. Si no se quiere omitir esas teclas, usar la opción `ignoreControlKeys: false`.
+**Teclas omitidas.** Si se formatea en `keyup`, el sistema omite las teclas de control: flechas, borrar, shift, etc. Si no se quiere omitir esas teclas, usar la opción `ignoreControlKeys: false`.
 
 La opción `ignoreControlKeys: false` **no** afecta la validación del RUT.
 
