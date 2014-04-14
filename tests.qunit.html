@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>jquery.rut.js test suite</title>
+  <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="jquery.rut.js"></script>
+  <script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
+  <script>
+    var okOriginal = "145694841";
+    var okFormateado = "14.569.484-1";
+    var invalidOriginal = "14569484K";
+    var invalidFormateado = "14.569.484-K";
+    var textbox = function(val) {
+      return $("<input type='text' id='format-blur' placeholder='14.569.484-1' value='" + val + "' />");
+    }
+    module("pre");
+    test( "plugin loading", function() {
+      ok($.isFunction($("#format-blur").rut), "Existe la función jQuery.rut()" );
+    });
+    module("blur");
+    test( "format-triggered-onValid", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textbox(okOriginal));
+      equal($("input", fxtr).val(), okOriginal, "El valor es el original");
+      $("input", fxtr).rut();
+      equal($("input", fxtr).val(), okOriginal, "El valor no se formatea automáticamente");
+      $("input", fxtr).triggerHandler("blur");
+      equal($("input", fxtr).val(), okFormateado, "El valor fue formateado en blur");
+    });
+    test( "format-triggered-onInalid", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textbox(invalidOriginal));
+      equal($("input", fxtr).val(), invalidOriginal, "El valor es el original");
+      $("input", fxtr).rut();
+      equal($("input", fxtr).val(), invalidOriginal, "El valor no se formatea automáticamente");
+      $("input", fxtr).triggerHandler("blur");
+      equal($("input", fxtr).val(), invalidFormateado, "El valor fue formateado en blur");
+    });
+    asyncTest( "validate-triggered-onValid", 2, function() {
+      var fxtr = $("#qunit-fixture");
+      var valid = false;
+      var invalid = false;
+      fxtr.append(textbox(okOriginal));
+      $("input", fxtr).rut();
+      $("input", fxtr).on("rutValido", function() {
+        valid = true;
+      });
+      $("input", fxtr).on("rutInvalido", function() {
+        invalid = true;
+      });
+      $("input", fxtr).triggerHandler("blur");
+      start();
+      ok(valid, "evento rutValido gatillado");
+      ok(invalid == false, "evento rutInvalido no fue gatillado");
+    });
+    asyncTest( "validate-triggered-onInvalid", 2, function() {
+      var fxtr = $("#qunit-fixture");
+      var valid = false;
+      var invalid = false;
+      fxtr.append(textbox(invalidOriginal));
+      $("input", fxtr).rut();
+      $("input", fxtr).on("rutValido", function() {
+        valid = true;
+      });
+      $("input", fxtr).on("rutInvalido", function() {
+        invalid = true;
+      });
+      $("input", fxtr).triggerHandler("blur");
+      start();
+      ok(valid == false, "evento rutValido no fue gatillado");
+      ok(invalid, "evento rutInvalido gatillado");
+    });
+    test( "validate-correct-args-onValid", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textbox(okOriginal));
+      $("input", fxtr).rut();
+      $("input", fxtr).on("rutValido", function(e, rut, dv) {
+        ok(e, "El evento fue retornado");
+        equal(rut, 14569484, "El rut fue retornado");
+        equal(dv, "1", "El dv fue retornado");
+      });
+      $("input", fxtr).triggerHandler("blur");
+    });
+  </script>
+</body>
+</html>
