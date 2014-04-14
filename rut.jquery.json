@@ -1,0 +1,33 @@
+{
+    "name": "rut",
+    "title": "jQuery Rut",
+    "description": "Plugin para validar y formatear un RUT en un input de texto",
+    "keywords": [
+        "rut",
+        "chile"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "Pablo Andrés Marambio Cathalifaud",
+        "url": "https://github.com/pablomarambio"
+    },
+    "maintainers": [
+        {
+            "name": "Pablo Andrés Marambio Cathalifaud",
+            "url": "https://github.com/pablomarambio"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/pablomarambio/jquery.rut/issues",
+    "homepage": "https://github.com/pablomarambio/jquery.rut",
+    "docs": "https://github.com/pablomarambio/jquery.rut/issues",
+    "download": "http://code.jquery.com/#rut",
+    "dependencies": {
+        "jquery": ">=1.4"
+    }
+}
