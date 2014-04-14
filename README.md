@@ -1,4 +1,4 @@
-## jQuery.rut
+## jQuery.rut [![Code Climate](https://codeclimate.com/github/pablomarambio/jquery.rut.png)](https://codeclimate.com/github/pablomarambio/jquery.rut)
 
 Plugin de jQuery para formateo y validación de RUTs.
 
