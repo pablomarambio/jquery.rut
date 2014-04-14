@@ -124,4 +124,18 @@
 			$.error("El método " + methodOrOptions + " no existe en jQuery.rut");
 		}
 	};
+
+	$.formatRut = function(rut) {
+		return format(rut);
+	}
+
+	$.validateRut = function(rut, fn) {
+		if(isValidRut(rut)) {
+			var rd = splitRutAndDv(rut);
+			$.isFunction(fn) && fn(rd[0], rd[1]);
+			return true;
+		} else {
+			return false;
+		}
+	}
 })(jQuery);

@@ -21,7 +21,30 @@
     }
     module("pre");
     test( "plugin loading", function() {
-      ok($.isFunction($("#format-blur").rut), "Existe la función jQuery.rut()" );
+      ok($.isFunction($("#format-blur").rut), "Existe la función $('...').rut()" );
+      ok($.isFunction($.formatRut), "Existe la función jQuery.formatRut()" );
+      ok($.isFunction($.validateRut), "Existe la función jQuery.validateRut()" );
+    });
+    module("static");
+    test( "format", function() {
+      equal(okFormateado, $.formatRut(okOriginal), "rut válido, formateado correctamente");
+      equal(okFormateado, $.formatRut(okFormateado), "rut válido y formateado, formateado correctamente");
+      equal(invalidFormateado, $.formatRut(invalidOriginal), "rut inválido, formateado correctamente");
+      equal(invalidFormateado, $.formatRut(invalidFormateado), "rut inválido y formateado, formateado correctamente");
+    });
+    asyncTest( "validate", function() {
+      var calledOnInvalid = false;
+      ok($.validateRut(okOriginal), "rut válido identificado como tal");
+      ok(!$.validateRut(invalidOriginal), "rut inválido identificado como tal");
+      $.validateRut(okOriginal, function(rut, dv) {
+        equal(14569484, rut, "RUT dividido correctamente");
+        equal(1, dv, "DV dividido correctamente");
+      });
+      $.validateRut(invalidOriginal, function(rut, dv) {
+        calledOnInvalid = true;
+      });
+      equal(calledOnInvalid, false, "No se invocó el callback con un RUT inválido");
+      start();
     });
     module("blur");
     test( "format-triggered-onValid", function() {

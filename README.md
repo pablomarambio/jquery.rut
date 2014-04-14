@@ -1,6 +1,6 @@
 ## jQuery.rut
 
-Plugin de jQuery para formateo y validación de RUTs. Este plugin funciona sobre un input de tipo texto.
+Plugin de jQuery para formateo y validación de RUTs.
 
 ### Licencia
 
@@ -11,10 +11,10 @@ Plugin de jQuery para formateo y validación de RUTs. Este plugin funciona sobre
 ### Requisitos y limitaciones
 
 - Para usar el plugin, inclúyelo en una página que cuente con jQuery 1.4+
-- Por ahora, el plugin sólo funciona con un único input. Para cargar múltiples input se debe invocar el plugin `.rut()` por cada uno de ellos.
+- Si se usa para validar o formatear el texto de varios input, se debe invocar el plugin `.rut()` por cada uno de ellos.
 - Sólo funciona con inputs de tipo texto
 
-### Uso
+### Uso en input
 
 **Ejemplos.** Para probar la funcionalidad, descarga `jquery.rut.js` y `demo.html` en una misma carpeta y abre `demo.html`en un browser.
 
@@ -68,3 +68,29 @@ $("input#rut").rut().on('rutValido', function(e, rut, dv) {
 ```
 
 Notar que cuando el rut es válido, la función recibe dos argumentos adicionales, el RUT y el dígito verificador. En este caso, el RUT no vendrá formateado.
+
+### Uso sin input
+
+También es posible formatear y validar strings que contienen RUTs.
+
+**Formateo.** Invocar la función `formatRut`, la que recibe el RUT a formatear.
+
+```javascript
+var rut = "145694841";
+$.formatRut(rut); #=> "14.569.484-1";
+```
+
+**Validación.** Invocar la función `validateRut`, la que recibe el RUT a testear y, opcionalmente, una función para procesar el rut separado de su dígito verificador.
+
+```javascript
+var rut = "145694841";
+if($.validateRut(rut)) {
+	alert("El rut es válido!");
+}
+//Usando un callback para recibir el RUT dividido en partes
+$.formatRut(rut, function(rut, dv) {
+	//Sólo se invoca si el RUT es válido
+	alert("El RUT es " + rut +  "y el DV es " + dv);
+});
+```
+
