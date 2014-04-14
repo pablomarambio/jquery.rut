@@ -89,9 +89,9 @@ if($.validateRut(rut)) {
 	alert("El rut es válido!");
 }
 // callback para recibir el RUT dividido en partes
-$.formatRut(rut, function(r, dv) {
+$.validateRut(rut, function(r, dv) {
 	// esta función sólo se invoca si el RUT es válido
-	alert("El RUT es " + r +  "y el DV es " + dv);
+	alert("El RUT es " + r +  "y su DV es " + dv);
 });
 ```
 
