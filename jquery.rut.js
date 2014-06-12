@@ -102,15 +102,22 @@
 	// public methods
 	var methods = {
 		init: function(options) {
-			var that = this;
-			that.opts = $.extend({}, defaults, options);
-			that.opts.formatOn && that.on(that.opts.formatOn, function(e) { 
-				if(that.opts.ignoreControlKeys && isControlKey(e)) return;
-				formatInput(that, e);
-			});
-			that.opts.validateOn && that.on(that.opts.validateOn, function(e) { 
-				validateInput(that, e);
-			});
+			if (this.length > 1) {
+				/* Valida multiples objetos a la ves */
+				for (var i = 0; i < this.length; i++) {
+					$(this[i]).rut(options);
+				};
+			} else {
+				var that = this;
+				that.opts = $.extend({}, defaults, options);
+				that.opts.formatOn && that.on(that.opts.formatOn, function(e) { 
+					if(that.opts.ignoreControlKeys && isControlKey(e)) return;
+					formatInput(that, e);
+				});
+				that.opts.validateOn && that.on(that.opts.validateOn, function(e) { 
+					validateInput(that, e);
+				});
+			}
 			return this;
 		}
 	};
