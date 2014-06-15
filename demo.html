@@ -150,7 +150,7 @@
               </div>
             </div>
           </form>
-          <pre>$("form#multiple-objetos input").rut();</pre>
+          <pre>$("form#multiple-objetos input").rut({formatOn: 'keyup'});</pre>
         </div>
     </div> <!-- /container -->
 
@@ -160,11 +160,11 @@
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="jquery.rut.min.js"></script>
+    <script src="jquery.rut.js"></script>
     <script type="text/javascript">
       $(function(){
         $("form#basico input").rut();
-        $("form#multiple-objetos input").rut();
+        $("form#multiple-objetos input").rut({formatOn: 'keyup'});
         $("form#formato-live input").rut({formatOn: 'keyup'});
         $("form#validacion-live input").rut({formatOn: 'keyup', validateOn: 'keyup'}).on('rutInvalido', function(){ $(this).parents(".control-group").addClass("error")}).on('rutValido', function(){ $(this).parents(".control-group").removeClass("error")});
         $("form#extraer-cuerpo input").rut().on('rutValido', function(e, rut){alert("Su RUT sin DV es " + rut);});
