@@ -103,7 +103,7 @@
 	var methods = {
 		init: function(options) {
 			if (this.length > 1) {
-				/* Valida multiples objetos a la ves */
+				/* Valida multiples objetos a la vez */
 				for (var i = 0; i < this.length; i++) {
 					console.log(this[i]);
 					$(this[i]).rut(options);
