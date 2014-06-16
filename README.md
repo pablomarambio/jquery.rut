@@ -92,7 +92,5 @@ $.validateRut(rut, function(r, dv) {
 
 ### Licencia
 
-1. Este plugin y todo el código contenido en este repositorio está regido por la licencia MIT 
-
-2. Este plugin también está a la venta bajo otras licencias. Para consultas, póngase en contacto con @pablomarambio en Twitter.
+Este plugin y todo el código contenido en este repositorio está regido por la licencia MIT
 
