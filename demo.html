@@ -117,14 +117,46 @@
     $(this).parents(".control-group").removeClass("error")
   });</pre>
         </div>
-
-      <hr>
-
-      <footer>
-        <p>&copy; Pablo Marambio Cathalifaud 2013</p>
-      </footer>
-
+        <div class="span6">
+          <h2>Eventos para múltiples objetos</h2>
+          <p>Se puede activar las funcionalidades para múltiples objetos a la ves.</p>
+          <form id="multiple-objetos" class="form-horizontal">
+            <div class="control-group">
+              <lable class="control-label">RUT 1</lable>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1">
+                <span class="help-inline">RUT Chileno</span>
+              </div>
+            </div>
+            <div class="control-group">
+              <lable class="control-label">RUT 2</lable>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1">
+                <span class="help-inline">RUT Chileno</span>
+              </div>
+            </div>
+            <div class="control-group">
+              <lable class="control-label">RUT 3</lable>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1">
+                <span class="help-inline">RUT Chileno</span>
+              </div>
+            </div>
+            <div class="control-group">
+              <lable class="control-label">RUT 4</lable>
+              <div class="controls">
+                <input type="text" placeholder="14.569.484-1">
+                <span class="help-inline">RUT Chileno</span>
+              </div>
+            </div>
+          </form>
+          <pre>$("form#multiple-objetos input").rut({formatOn: 'keyup'});</pre>
+        </div>
     </div> <!-- /container -->
+
+    <footer>
+      <p>&copy; Pablo Marambio Cathalifaud 2013, <a href="https://github.com/alfa30">Jonathan Delgado Zamorano</a> 2014.</p>
+    </footer>
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -132,6 +164,7 @@
     <script type="text/javascript">
       $(function(){
         $("form#basico input").rut();
+        $("form#multiple-objetos input").rut({formatOn: 'keyup'});
         $("form#formato-live input").rut({formatOn: 'keyup'});
         $("form#validacion-live input").rut({formatOn: 'keyup', validateOn: 'keyup'}).on('rutInvalido', function(){ $(this).parents(".control-group").addClass("error")}).on('rutValido', function(){ $(this).parents(".control-group").removeClass("error")});
         $("form#extraer-cuerpo input").rut().on('rutValido', function(e, rut){alert("Su RUT sin DV es " + rut);});

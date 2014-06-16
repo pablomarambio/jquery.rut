@@ -88,12 +88,9 @@ $.validateRut(rut, function(r, dv) {
 ### Requisitos y limitaciones
 
 - Para usar el plugin, inclúyelo en una página que cuente con jQuery 1.4+
-- Si se usa para validar o formatear el texto de varios input, se debe invocar el plugin `.rut()` por cada uno de ellos.
 - Sólo funciona con inputs de tipo texto
 
 ### Licencia
 
-1. Este plugin y todo el código contenido en este repositorio está regido por la licencia MIT 
-
-2. Este plugin también está a la venta bajo otras licencias. Para consultas, póngase en contacto con @pablomarambio en Twitter.
+Este plugin y todo el código contenido en este repositorio está regido por la licencia MIT
 

@@ -17,8 +17,36 @@
     var okFormateado = "14.569.484-1";
     var invalidOriginal = "14569484K";
     var invalidFormateado = "14.569.484-K";
+    /**
+     * Crear un objeto input
+     * 
+     * @param  {string}       val Define el valor dentro del input
+     * @return {object:input}     Contiene un elemento input
+     */
     var textbox = function(val) {
-      return $("<input type='text' id='test' placeholder='14.569.484-1' value='" + val + "' />");
+      return $("<input>").attr({
+                                id          : 'test',
+                                type        : 'text',
+                                placeholder : '14.569.484-1',
+                                value       : val.toString()
+                              });
+    }
+    /**
+     * Crea múltiples objetos input sin definir el atributo id
+     * 
+     * @param  {stinng[]}       val Contiene el valor del objecto
+     * @return {object:input}     Contiene el elemento input
+     */
+    var textboxs = function(val) {
+      var rt = [];
+      for (var i = 0; i < val.length; i++) {
+        rt.push($("<input>").attr({
+                                type        : 'text',
+                                placeholder : '14.569.484-1',
+                                value       : val[i]
+                              }));
+      };
+      return rt;
     }
     module("pre");
     test( "plugin loading", function() {
@@ -59,6 +87,24 @@
       $("input", fxtr).triggerHandler("blur");
       equal($("input", fxtr).val(), okFormateado, "El valor fue formateado en blur");
     });
+    /////////////////////////////
+    // Para múltiples objectos //
+    /////////////////////////////
+    test( "format-triggered-onValid-multiple", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textboxs([okOriginal,okOriginal]));
+      for (var i = 0; i < 2; i++) {
+        equal($($("input", fxtr)[i]).val(), okOriginal, "El valor "+i+" es el original");
+      };
+      $("input", fxtr).rut();
+      for (var i = 0; i < 2; i++) {
+        equal($($("input", fxtr)[i]).val(), okOriginal, "El valor "+i+" no se formatea automáticamente");
+      }
+      for (var i = 0; i < 2; i++) {
+        $($("input", fxtr)[i]).triggerHandler("blur");
+        equal($($("input", fxtr)[i]).val(), okFormateado, "El valor "+i+" fue formateado en blur");
+      }
+    });
     test( "format-triggered-onInalid", function() {
       var fxtr = $("#qunit-fixture");
       fxtr.append(textbox(invalidOriginal));
@@ -67,6 +113,24 @@
       equal($("input", fxtr).val(), invalidOriginal, "El valor no se formatea automáticamente");
       $("input", fxtr).triggerHandler("blur");
       equal($("input", fxtr).val(), invalidFormateado, "El valor fue formateado en blur");
+    });
+    /////////////////////////////
+    // Para múltiples objectos //
+    /////////////////////////////
+    test( "format-triggered-onInalid-multiple", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textboxs([invalidOriginal,invalidOriginal]));
+      for (var i = 0; i < 2; i++) {
+        equal($($("input", fxtr)[i]).val(), invalidOriginal, "El valor "+i+" es el original");
+      };
+      $("input", fxtr).rut();
+      for (var i = 0; i < 2; i++) {
+        equal($($("input", fxtr)[i]).val(), invalidOriginal, "El valor "+i+" no se formatea automáticamente");
+      }
+      for (var i = 0; i < 2; i++) {
+        $($("input", fxtr)[i]).triggerHandler("blur");
+        equal($($("input", fxtr)[i]).val(), invalidFormateado, "El valor "+i+" fue formateado en blur");
+      }
     });
     asyncTest( "validate-triggered-onValid", 2, function() {
       var fxtr = $("#qunit-fixture");
@@ -85,6 +149,28 @@
       ok(valid, "evento rutValido gatillado");
       ok(invalid == false, "evento rutInvalido no fue gatillado");
     });
+    /////////////////////////////
+    // Para múltiples objectos //
+    /////////////////////////////
+    asyncTest( "validate-triggered-onValid-multiple", 2, function() {
+      var fxtr = $("#qunit-fixture");
+      var valid = false;
+      var invalid = false;
+      fxtr.append(textboxs([okOriginal,okOriginal]));
+      $("input", fxtr).rut();
+      $("input", fxtr).on("rutValido", function() {
+        valid = true;
+      });
+      $("input", fxtr).on("rutInvalido", function() {
+        invalid = true;
+      });
+      for (var i = 0; i < 2; i++) {
+        $($("input", fxtr)[i]).triggerHandler("blur");
+      }
+      start();
+      ok(valid, "evento rutValido gatillado en múltiples textbox");
+      ok(invalid == false, "evento rutInvalido no fue gatillado en múltiples textbox");
+    });
     asyncTest( "validate-triggered-onInvalid", 2, function() {
       var fxtr = $("#qunit-fixture");
       var valid = false;
@@ -102,6 +188,28 @@
       ok(valid == false, "evento rutValido no fue gatillado");
       ok(invalid, "evento rutInvalido gatillado");
     });
+    /////////////////////////////
+    // Para múltiples objectos //
+    /////////////////////////////
+    asyncTest( "validate-triggered-onInvalid-multiple", 2, function() {
+      var fxtr = $("#qunit-fixture");
+      var valid = false;
+      var invalid = false;
+      fxtr.append(textboxs([invalidOriginal,invalidOriginal]));
+      $("input", fxtr).rut();
+      $("input", fxtr).on("rutValido", function() {
+        valid = true;
+      });
+      $("input", fxtr).on("rutInvalido", function() {
+        invalid = true;
+      });
+      for (var i = 0; i < 2; i++) {
+        $($("input", fxtr)[i]).triggerHandler("blur");
+      };
+      start();
+      ok(valid == false, "evento rutValido no fue gatillado en múltiples textbox");
+      ok(invalid, "evento rutInvalido gatillado en múltiples textbox");
+    });
     test( "validate-correct-args-onValid", function() {
       var fxtr = $("#qunit-fixture");
       fxtr.append(textbox(okOriginal));
@@ -112,6 +220,23 @@
         equal(dv, "1", "El dv fue retornado");
       });
       $("input", fxtr).triggerHandler("blur");
+    });
+    /////////////////////////////
+    // Para múltiples objectos //
+    /////////////////////////////
+    test( "validate-correct-args-onValid-multiple", function() {
+      var fxtr = $("#qunit-fixture");
+      fxtr.append(textboxs([okOriginal,okOriginal]));
+      $("input", fxtr).rut();
+      $("input", fxtr).on("rutValido", function(e, rut, dv) {
+        ok(e, "El evento fue retornado");
+        equal(rut, 14569484, "El rut fue retornado");
+        equal(dv, "1", "El dv fue retornado");
+      });
+      for (var i = 0; i < 2; i++) {
+        $($("input", fxtr)[i]).triggerHandler("blur");
+        ok(true,"blur ok para objeto "+i);
+      };
     });
     module("keyup");
     asyncTest( "format-invalid", function() {
@@ -146,7 +271,7 @@
       });
       Syn.type("15776", 'test');
     });
-    asyncTest( "format-control-keys-ignored", function() {
+    asyncTest("format-control-keys-ignored", function() {
       var fxtr = $("#qunit-fixture");
       fxtr.append(textbox(""));
       var formatsIncluded = [];
