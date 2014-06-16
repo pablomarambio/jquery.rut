@@ -6,7 +6,7 @@
         "rut",
         "chile"
     ],
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": {
         "name": "Pablo Andrés Marambio Cathalifaud",
         "url": "https://github.com/pablomarambio"
@@ -15,6 +15,10 @@
         {
             "name": "Pablo Andrés Marambio Cathalifaud",
             "url": "https://github.com/pablomarambio"
+        },
+        {
+            "name": "Jonathan Delgado",
+            "url": "https://github.com/alfa30"
         }
     ],
     "licenses": [
