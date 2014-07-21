@@ -134,7 +134,7 @@
 		}
 	};
 
-	$.computeDV = function(rut){
+	$.computeDv = function(rut){
 		var cleanRut = clearFormat(rut);
 		return computeDV( cleanRut );
 	}
