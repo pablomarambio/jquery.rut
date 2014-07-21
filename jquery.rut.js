@@ -1,3 +1,4 @@
+//!     jQuery.rut.js
 //		Permission is hereby granted, free of charge, to any person obtaining a copy
 //		of this software and associated documentation files (the "Software"), to deal
 //		in the Software without restriction, including without limitation the rights
@@ -16,7 +17,7 @@
 //		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //		THE SOFTWARE.
 
-//		Para obtener este programa bajo otra licencia, póngase en 
+//		Para obtener este programa bajo otra licencia, póngase en
 //		contacto con @pablomarambio en Twitter.
 ;(function($){
 	var defaults = {
@@ -111,11 +112,11 @@
 			} else {
 				var that = this;
 				that.opts = $.extend({}, defaults, options);
-				that.opts.formatOn && that.on(that.opts.formatOn, function(e) { 
+				that.opts.formatOn && that.on(that.opts.formatOn, function(e) {
 					if(that.opts.ignoreControlKeys && isControlKey(e)) return;
 					formatInput(that, e);
 				});
-				that.opts.validateOn && that.on(that.opts.validateOn, function(e) { 
+				that.opts.validateOn && that.on(that.opts.validateOn, function(e) {
 					validateInput(that, e);
 				});
 			}
@@ -132,6 +133,11 @@
 			$.error("El método " + methodOrOptions + " no existe en jQuery.rut");
 		}
 	};
+
+	$.computeDV = function(rut){
+		var cleanRut = clearFormat(rut);
+		return computeDV( cleanRut );
+	}
 
 	$.formatRut = function(rut) {
 		return format(rut);
