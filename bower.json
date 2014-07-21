@@ -1,0 +1,42 @@
+{
+  "name": "jquery.rut",
+  "main": "jquery.rut.js",
+  "version": "1.0.5",
+  "homepage": "https://github.com/AyerViernes/jquery.rut",
+  "authors": [
+    {
+      "name": "Pablo Andrés Marambio Cathalifaud",
+      "homepage": "https://github.com/pablomarambio"
+    },
+    {
+      "name": "Jonathan Delgado",
+      "homepage": "https://github.com/alfa30"
+    },
+    {
+      "name": "Felipe Lavín Z.",
+      "homepage": "https://github.com/felipelavinz"
+    }
+  ],
+  "description": "Plugin para validar, formatear y parsear un RUT chileno",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "rut",
+    "chile",
+    "validate",
+    "forms"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.4.0"
+  }
+}
