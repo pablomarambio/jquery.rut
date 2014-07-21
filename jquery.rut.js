@@ -136,7 +136,7 @@
 
 	$.computeDv = function(rut){
 		var cleanRut = clearFormat(rut);
-		return computeDV( cleanRut );
+		return computeDv( cleanRut );
 	}
 
 	$.formatRut = function(rut) {
