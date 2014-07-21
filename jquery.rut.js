@@ -136,7 +136,7 @@
 
 	$.computeDv = function(rut){
 		var cleanRut = clearFormat(rut);
-		return computeDv( cleanRut );
+		return computeDv( parseInt(cleanRut, 10) );
 	}
 
 	$.formatRut = function(rut) {
