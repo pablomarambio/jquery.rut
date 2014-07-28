@@ -2,8 +2,10 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		uglify: {
 			dist: {
-				sourceMap: true,
-				preserveComments: 'some',
+				options: {
+					sourceMap: true,
+					preserveComments: 'some'
+				},
 				files: {
 					"jquery.rut.min.js": "jquery.rut.js"
 				}
