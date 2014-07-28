@@ -1,6 +1,6 @@
 {
   "name": "jquery.rut",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Plugin para validar, formatear y parsear un RUT chileno",
   "main": "jquery.rut.js",
   "scripts": {
