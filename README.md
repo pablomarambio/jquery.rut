@@ -23,6 +23,7 @@ $("input#rut").rut();
 // validará cuando el texto haya cambiado
 $("input#rut").rut({
 	formatOn: 'keyup',
+    minimumLength: 8, // validar largo mínimo; default: 2
 	validateOn: 'change' // si no se quiere validar, pasar null
 });
 
@@ -30,6 +31,8 @@ $("input#rut").rut({
 // para validar el rut aún cuando el browser autocomplete el campo
 $("input#rut").rut({validateOn: 'change keyup'});
 ```
+
+**Validación del largo mínimo.** Es posible parametrizar la validación del largo mínimo del RUT. Esta opción acepta un entero (por defecto su valor es `2`) o un booleano (al utilizar `true` se utiliza el valor por defecto `2`). Técnicamente, el RUT `1-9` es válido; y existen RUTs válidos de personas vivas de 3 caracteres.
 
 **Teclas omitidas.** Si se formatea en `keyup`, el sistema omite las teclas de control: flechas, borrar, shift, etc. Si no se quiere omitir esas teclas, usar la opción `ignoreControlKeys: false`.
 
@@ -83,6 +86,10 @@ $.validateRut(rut, function(r, dv) {
 	// esta función sólo se invoca si el RUT es válido
 	alert("El RUT es " + r +  "y su DV es " + dv);
 });
+
+// la función acepta un tercer parámetro como objeto que se puede
+// utilizar para condicionar la validación del largo mínimo
+var isValid = $.validateRut(rut, null, { minimumLength: 4 });
 ```
 
 ### Requisitos y limitaciones
