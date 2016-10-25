@@ -23,7 +23,8 @@
 	var defaults = {
 		validateOn: 'blur',
 		formatOn: 'blur',
-		ignoreControlKeys: true
+		ignoreControlKeys: true,
+		minimumLength: 2
 	};
 
 	//private methods
@@ -57,12 +58,21 @@
 				e.keyCode == 91    // command
 			);
 	};
-	function isValidRut(rut) {
+	function isValidRut(rut, options) {
 		if(typeof(rut) !== 'string') return false;
 		var cRut = clearFormat(rut);
 		// validar por largo mínimo, sin guiones ni puntos:
 		// x.xxx.xxx-x
-		if(cRut.length < 8) return false;
+		if ( typeof options.minimumLength === 'boolean' ) {
+			if ( options.minimumLength && cRut.length < defaults.minimumLength ) {
+				return false;
+			}
+		} else {
+			var minLength = parseInt( options.minimumLength, 10 );
+			if ( cRut.length < minLength ) {
+				return false;
+			}
+		}
 		var cDv = cRut.charAt(cRut.length - 1).toUpperCase();
 		var nRut = parseInt(cRut.substr(0, cRut.length - 1));
 		if(nRut === NaN) return false;
@@ -87,7 +97,7 @@
 		$input.val(format($input.val()));
 	};
 	function validateInput($input, e) {
-		if(isValidRut($input.val())) {
+		if(isValidRut($input.val(), $input.opts)) {
 			$input.trigger('rutValido', splitRutAndDv($input.val()));
 		} else {
 			$input.trigger('rutInvalido');
@@ -145,8 +155,9 @@
 		return format(rut);
 	}
 
-	$.validateRut = function(rut, fn) {
-		if(isValidRut(rut)) {
+	$.validateRut = function(rut, fn, options) {
+		var options = options || {};
+		if(isValidRut(rut, options)) {
 			var rd = splitRutAndDv(rut);
 			$.isFunction(fn) && fn(rd[0], rd[1]);
 			return true;
