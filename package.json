@@ -1,0 +1,19 @@
+{
+  "name": "jquery.rut",
+  "version": "1.0.0",
+  "description": "Plugin de jQuery para formateo y validación de RUTs.",
+  "main": "jquery.rut.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablomarambio/jquery.rut.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablomarambio/jquery.rut/issues"
+  },
+  "homepage": "https://github.com/pablomarambio/jquery.rut#readme"
+}
