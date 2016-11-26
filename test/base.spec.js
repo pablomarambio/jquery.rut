@@ -1,9 +1,13 @@
 describe("A suite is just a function", function() {
-  var a;
 
-  it("should pass", function() {
-    a = true;
+  it("should load jQuery", function() {
 
-    expect(a).toBe(true);
+    expect(typeof jQuery).not.toBe("undefined");
   });
+
+  it("should load jQuery.rut", function() {
+
+    expect(typeof jQuery.formatRut).toBe("function");
+  });
+  
 });
