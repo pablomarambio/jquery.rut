@@ -4,16 +4,26 @@
   "description": "Plugin de jQuery para formateo y validación de RUTs.",
   "main": "jquery.rut.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pablomarambio/jquery.rut.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Pablo Andrés Marambio Cathalifaud",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/pablomarambio/jquery.rut/issues"
   },
-  "homepage": "https://github.com/pablomarambio/jquery.rut#readme"
+  "homepage": "https://github.com/pablomarambio/jquery.rut#readme",
+  "dependencies": {
+    "jasmine-core": "^2.5.2",
+    "jasmine-jquery": "^2.1.1",
+    "jsdom": "^9.8.3",
+    "karma": "^1.3.0",
+    "karma-jasmine": "^1.0.2"
+  },
+  "devDependencies": {
+    "karma-firefox-launcher": "^1.0.0"
+  }
 }
