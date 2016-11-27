@@ -22,19 +22,20 @@
 	var defaults = {
 		validateOn: 'blur',
 		formatOn: 'blur',
-		ignoreControlKeys: true
+		ignoreControlKeys: true,
+	    dotNotation: true
 	};
 
 	//private methods
 	function clearFormat(value) {
 		return value.replace(/[\.\-]/g, "");
 	};
-	function format(value) {
+	function format(value, dotNotation) {
 		rutAndDv = splitRutAndDv(value);
 		var cRut = rutAndDv[0]; var cDv = rutAndDv[1];
 		if(!(cRut && cDv)) return cRut || value;
 		var rutF = "";
-		while(cRut.length > 3) {
+		while (cRut.length > 3 && dotNotation) {
 			rutF = "." + cRut.substr(cRut.length - 3) + rutF;
 			cRut = cRut.substring(0, cRut.length - 3);
 		}
@@ -80,8 +81,8 @@
 			default	: return 11 - (suma % 11);
 		}
 	};
-	function formatInput($input, e) {
-		$input.val(format($input.val()));
+	function formatInput($input, dotNotation, e) {
+	    $input.val(format($input.val(), dotNotation));
 	};
 	function validateInput($input, e) {
 		if(isValidRut($input.val())) {
@@ -113,7 +114,7 @@
 				that.opts = $.extend({}, defaults, options);
 				that.opts.formatOn && that.on(that.opts.formatOn, function(e) { 
 					if(that.opts.ignoreControlKeys && isControlKey(e)) return;
-					formatInput(that, e);
+					formatInput(that, that.opts.dotNotation, e);
 				});
 				that.opts.validateOn && that.on(that.opts.validateOn, function(e) { 
 					validateInput(that, e);
@@ -133,8 +134,8 @@
 		}
 	};
 
-	$.formatRut = function(rut) {
-		return format(rut);
+	$.formatRut = function (rut, dotNotation) {
+	    return format(rut, dotNotation);
 	}
 
 	$.validateRut = function(rut, fn) {
