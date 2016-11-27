@@ -118,4 +118,53 @@ describe("jquery.rut validateOn", function() {
     expect(validRuts).toContain("157768441");
     expect(invalidRuts.length).toBe(0);
   });
+
+  it ("should validate a short rut on blur by default", function() {
+    validRuts = [];
+    invalidRuts = [];
+    $("#txtRut")
+      .rut({formatOn: ''}) // because formatOn could change the val() and thus the assertion result
+      .on("rutValido", function(e, rut, dv) {
+        validRuts.push($(this).val());
+      })
+      .on("rutInvalido", function(e) {
+        invalidRuts.push($(this).val());
+      });
+    $("#txtRut").focus();
+    keyPress(1, $("#txtRut"));
+    keyPress(9, $("#txtRut"));
+    $("#txt2").focus();
+    $("#txtRut").blur();
+    expect(validRuts.length).toBe(1);
+    expect(validRuts).toContain("19");
+    expect(invalidRuts.length).toBe(0);
+  });
+
+  it ("should validate a long rut on blur by default", function() {
+    validRuts = [];
+    invalidRuts = [];
+    $("#txtRut")
+      .rut({formatOn: ''}) // because formatOn could change the val() and thus the assertion result
+      .on("rutValido", function(e, rut, dv) {
+        validRuts.push($(this).val());
+      })
+      .on("rutInvalido", function(e) {
+        invalidRuts.push($(this).val());
+      });
+    $("#txtRut").focus();
+    keyPress(1, $("#txtRut"));
+    keyPress(5, $("#txtRut"));
+    keyPress(7, $("#txtRut"));
+    keyPress(7, $("#txtRut"));
+    keyPress(6, $("#txtRut"));
+    keyPress(8, $("#txtRut"));
+    keyPress(4, $("#txtRut"));
+    keyPress(4, $("#txtRut"));
+    keyPress(1, $("#txtRut"));
+    $("#txt2").focus();
+    $("#txtRut").blur();
+    expect(validRuts.length).toBe(1);
+    expect(validRuts).toContain("157768441");
+    expect(invalidRuts.length).toBe(0);
+  });
 });

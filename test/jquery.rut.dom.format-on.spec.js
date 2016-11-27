@@ -89,4 +89,42 @@ describe("jquery.rut formatOn", function() {
     $("#txtRut").change();
     expect($("#txtRut").val()).toBe("15.776.844-1");
   });
+
+  it ("should format a short rut on blur by default", function() {
+    $("#txtRut").rut();
+    $("#txtRut").focus();
+    keyPress(1, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("1");
+    keyPress(9, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("19");
+    $("#txt2").focus();
+    $("#txtRut").blur();
+    expect($("#txtRut").val()).toBe("1-9");
+  });
+
+  it ("should format a long rut on blur by default", function() {
+    $("#txtRut").rut();
+    $("#txtRut").focus();
+    keyPress(1, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("1");
+    keyPress(5, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("15");
+    keyPress(7, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("157");
+    keyPress(7, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("1577");
+    keyPress(6, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("15776");
+    keyPress(8, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("157768");
+    keyPress(4, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("1577684");
+    keyPress(4, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("15776844");
+    keyPress(1, $("#txtRut"));
+    expect($("#txtRut").val()).toBe("157768441");
+    $("#txt2").focus();
+    $("#txtRut").blur();
+    expect($("#txtRut").val()).toBe("15.776.844-1");
+  });
 });
