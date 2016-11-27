@@ -1,3 +1,4 @@
+//!     jQuery.rut.js
 //		Permission is hereby granted, free of charge, to any person obtaining a copy
 //		of this software and associated documentation files (the "Software"), to deal
 //		in the Software without restriction, including without limitation the rights
@@ -16,14 +17,15 @@
 //		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //		THE SOFTWARE.
 
-//		Para obtener este programa bajo otra licencia, póngase en 
+//		Para obtener este programa bajo otra licencia, póngase en
 //		contacto con @pablomarambio en Twitter.
 ;(function($){
 	var defaults = {
 		validateOn: 'blur',
 		formatOn: 'blur',
 		ignoreControlKeys: true,
-		useThousandsSeparator: true
+		useThousandsSeparator: true,
+		minimumLength: 2
 	};
 
 	//private methods
@@ -58,10 +60,21 @@
 				e.keyCode == 91    // command
 			);
 	};
-	function isValidRut(rut) {
+	function isValidRut(rut, options) {
 		if(typeof(rut) !== 'string') return false;
 		var cRut = clearFormat(rut);
-		if(cRut.length < 2) return false;
+		// validar por largo mínimo, sin guiones ni puntos:
+		// x.xxx.xxx-x
+		if ( typeof options.minimumLength === 'boolean' ) {
+			if ( options.minimumLength && cRut.length < defaults.minimumLength ) {
+				return false;
+			}
+		} else {
+			var minLength = parseInt( options.minimumLength, 10 );
+			if ( cRut.length < minLength ) {
+				return false;
+			}
+		}
 		var cDv = cRut.charAt(cRut.length - 1).toUpperCase();
 		var nRut = parseInt(cRut.substr(0, cRut.length - 1));
 		if(nRut === NaN) return false;
@@ -86,7 +99,7 @@
 		$input.val(format($input.val(), useThousandsSeparator));
 	};
 	function validateInput($input, e) {
-		if(isValidRut($input.val())) {
+		if(isValidRut($input.val(), $input.opts)) {
 			$input.trigger('rutValido', splitRutAndDv($input.val()));
 		} else {
 			$input.trigger('rutInvalido');
@@ -113,11 +126,11 @@
 			} else {
 				var that = this;
 				that.opts = $.extend({}, defaults, options);
-				that.opts.formatOn && that.on(that.opts.formatOn, function(e) { 
+				that.opts.formatOn && that.on(that.opts.formatOn, function(e) {
 					if(that.opts.ignoreControlKeys && isControlKey(e)) return;
 					formatInput(that, that.opts.useThousandsSeparator, e);
 				});
-				that.opts.validateOn && that.on(that.opts.validateOn, function(e) { 
+				that.opts.validateOn && that.on(that.opts.validateOn, function(e) {
 					validateInput(that, e);
 				});
 			}
@@ -140,8 +153,14 @@
 		return format(rut, useThousandsSeparator);
 	}
 
-	$.validateRut = function(rut, fn) {
-		if(isValidRut(rut)) {
+	$.computeDv = function(rut){
+		var cleanRut = clearFormat(rut);
+		return computeDv( parseInt(cleanRut, 10) );
+	}
+
+	$.validateRut = function(rut, fn, options) {
+		var options = options || {};
+		if(isValidRut(rut, options)) {
 			var rd = splitRutAndDv(rut);
 			$.isFunction(fn) && fn(rd[0], rd[1]);
 			return true;
