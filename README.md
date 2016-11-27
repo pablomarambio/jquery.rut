@@ -97,6 +97,10 @@ $.validateRut(rut, function(r, dv) {
 // la función acepta un tercer parámetro como objeto que se puede
 // utilizar para condicionar la validación del largo mínimo
 var isValid = $.validateRut(rut, null, { minimumLength: 4 });
+
+$.validateRut("1-9", function(r, dv) {
+	alert("nunca me verás"); // este mensaje no aparecerá ...
+}, { minimumLength: 4 }); // ... porque los ruts de largo inferior a 4 no se consideran válidos
 ```
 
 ### Requisitos y limitaciones
