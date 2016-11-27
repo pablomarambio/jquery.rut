@@ -102,14 +102,15 @@ $.validateRut(rut, function(r, dv) {
 
 **Patches.** Si quieres incluir un cambio tú mismo, eres bienvenido! Simplemente [crea un pull request](https://github.com/pablomarambio/jquery.rut/pulls). 
 
-El pull request debe pasar todos los tests y debe incluir sus propios tests para ser aceptado.
-
-Para ejecutar los tests debes tener node.js y firefox.
+**Tests.** El repositorio cuenta con más de 40 tests que se corren de manera automática en Safari, Firefox y Chrome. Para correrlos, haz:
 ```sh
 npm install
 npm test
 ```
-Los tests están en `/test`. Este repositorio usa travis para correr los tests de forma automática. Puedes ver el resultado de la compilación acá: https://travis-ci.org/pablomarambio/jquery.rut/
+
+Para ejecutar los tests debes tener node.js y Firefox, Chrome y Safari. Si no quieres probar en todos los browsers, puedes cambiar la lista de browsers a probar en `/karma.conf.js`.
+
+Si vas a hacer un cambio, éste debe pasar todos los tests y *debe incluir sus propios tests*. Al menos deben pasar en Firefox38, que es el browser usado por [Travis](https://travis-ci.org/pablomarambio/jquery.rut/).
 
 ### Licencia
 
