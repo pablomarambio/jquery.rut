@@ -138,8 +138,9 @@ describe("jquery.rut validateOn", function() {
     keyPress(9, $("#txtRut"));
     $("#txt2").focus();
     $("#txtRut").blur();
-    expect(validRuts.length).toBe(1);
+    dump(validRuts);
     expect(validRuts).toContain("19");
+    expect(validRuts.length).toBe(1);
     expect(invalidRuts.length).toBe(0);
   });
 
@@ -166,8 +167,9 @@ describe("jquery.rut validateOn", function() {
     keyPress(1, $("#txtRut"));
     $("#txt2").focus();
     $("#txtRut").blur();
-    expect(validRuts.length).toBe(1);
+    dump(validRuts);
     expect(validRuts).toContain("157768441");
+    expect(validRuts.length).toBe(1);
     expect(invalidRuts.length).toBe(0);
   });
 });
