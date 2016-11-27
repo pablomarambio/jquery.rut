@@ -97,6 +97,20 @@ $.validateRut(rut, function(r, dv) {
 - Para usar el plugin, inclúyelo en una página que cuente con jQuery 1.4+
 - Sólo funciona con inputs de tipo texto
 
+### Contribuir
+**Lista de bugs e ideas.** Si encontraste un bug, por favor [regístralo acá](https://github.com/pablomarambio/jquery.rut/issues). El mismo lugar sirve para discutir nuevas ideas.
+
+**Patches.** Si quieres incluir un cambio tú mismo, eres bienvenido! Simplemente [crea un pull request](https://github.com/pablomarambio/jquery.rut/pulls). 
+
+El pull request debe pasar todos los tests y debe incluir sus propios tests para ser aceptado.
+
+Para ejecutar los tests debes tener node.js y firefox.
+```sh
+npm install
+npm test
+```
+Los tests están en `/test`. Este repositorio usa travis para correr los tests de forma automática. Puedes ver el resultado de la compilación acá: https://travis-ci.org/pablomarambio/jquery.rut/
+
 ### Licencia
 
 Este plugin y todo el código contenido en este repositorio está regido por la licencia MIT
