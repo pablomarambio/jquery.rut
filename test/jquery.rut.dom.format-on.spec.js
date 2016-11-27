@@ -1,4 +1,4 @@
-describe("jquery.rut", function() {
+describe("jquery.rut formatOn", function() {
   $ = jQuery;
   var spyEvent;
 
