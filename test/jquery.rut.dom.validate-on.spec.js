@@ -21,11 +21,14 @@ describe("jquery.rut validateOn", function() {
     jQuery("#txt2").remove();
   });
 
+   // All these tests use {formatOn: ''} to avoid changing 
+   // the $("#txtRut").val() and thus the assertion result
+
   it ("should validate a short rut as it is typed into a textbox", function() {
     validRuts = [];
     invalidRuts = [];
     $("#txtRut")
-      .rut({validateOn: 'keydown'})
+      .rut({validateOn: 'keydown', formatOn: ''})
       .on("rutValido", function(e, rut, dv) {
         validRuts.push($(this).val());
       })
@@ -45,7 +48,7 @@ describe("jquery.rut validateOn", function() {
     validRuts = [];
     invalidRuts = [];
     $("#txtRut")
-      .rut({validateOn: 'keydown'})
+      .rut({validateOn: 'keydown', formatOn: ''})
       .on("rutValido", function(e, rut, dv) {
         validRuts.push($(this).val());
       })
@@ -74,7 +77,7 @@ describe("jquery.rut validateOn", function() {
     validRuts = [];
     invalidRuts = [];
     $("#txtRut")
-      .rut({validateOn: 'change'})
+      .rut({validateOn: 'change', formatOn: ''})
       .on("rutValido", function(e, rut, dv) {
         validRuts.push($(this).val());
       })
@@ -95,7 +98,7 @@ describe("jquery.rut validateOn", function() {
     validRuts = [];
     invalidRuts = [];
     $("#txtRut")
-      .rut({validateOn: 'change'})
+      .rut({validateOn: 'change', formatOn: ''})
       .on("rutValido", function(e, rut, dv) {
         validRuts.push($(this).val());
       })
@@ -123,7 +126,7 @@ describe("jquery.rut validateOn", function() {
     validRuts = [];
     invalidRuts = [];
     $("#txtRut")
-      .rut({formatOn: ''}) // because formatOn could change the val() and thus the assertion result
+      .rut({formatOn: ''})
       .on("rutValido", function(e, rut, dv) {
         validRuts.push($(this).val());
       })
@@ -144,7 +147,7 @@ describe("jquery.rut validateOn", function() {
     validRuts = [];
     invalidRuts = [];
     $("#txtRut")
-      .rut({formatOn: ''}) // because formatOn could change the val() and thus the assertion result
+      .rut({formatOn: ''})
       .on("rutValido", function(e, rut, dv) {
         validRuts.push($(this).val());
       })
