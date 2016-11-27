@@ -29,6 +29,10 @@ $("input#rut").rut({
 // es posible pasar varios eventos separados por espacio, útil
 // para validar el rut aún cuando el browser autocomplete el campo
 $("input#rut").rut({validateOn: 'change keyup'});
+
+// si no se quiere mostrar el punto para separador de miles, 
+// pasar la opción useThousandsSeparator : false
+$("input#rut").rut({useThousandsSeparator : false}); //formateará '145694841' como '14569484-1'
 ```
 
 **Teclas omitidas.** Si se formatea en `keyup`, el sistema omite las teclas de control: flechas, borrar, shift, etc. Si no se quiere omitir esas teclas, usar la opción `ignoreControlKeys: false`.
@@ -68,6 +72,9 @@ También es posible formatear y validar strings que contienen un RUT.
 ```javascript
 var rut = "145694841";
 $.formatRut(rut); // => "14.569.484-1";
+
+// el segundo argumento opcional permite omitir los puntos
+$.formatRut(rut, false); // => "14569484-1";
 ```
 
 **Validación.** Invocar la función `validateRut`, la que recibe el RUT a testear y, opcionalmente, una función para procesar el rut separado de su dígito verificador.
