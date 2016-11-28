@@ -129,12 +129,12 @@
 				for (var i = 0; i < this.length; i++) {
 					console.log(this[i]);
 					$(this[i]).rut(options);
-				};
+				}
 			} else {
 				var that = this;
 				that.opts = $.extend({}, defaults, options);
 				that.opts.formatOn && that.on(that.opts.formatOn, function(e) {
-					if(that.opts.ignoreControlKeys && isControlKey(e)) { return; }
+					if(that.opts.ignoreControlKeys && isControlKey(e)) { return; }
 					formatInput(that, that.opts.useThousandsSeparator);
 				});
 				that.opts.validateOn && that.on(that.opts.validateOn, function(e) {
