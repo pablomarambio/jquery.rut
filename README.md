@@ -2,6 +2,18 @@
 
 Plugin de jQuery para formateo y validación de RUTs. Puede validar y decorar el rut *en vivo*, mientras se escribe. Testeado en distintos browsers [de forma automática](https://travis-ci.org/pablomarambio/jquery.rut/).
 
+### TL; DR (Muy largo, me da lata leer)
+Baja el archivo `jquery.rut.js` y déjalo en la raíz de tu proyecto. Linkéalo a tu html pegando esto en el head: `<script src="jquery.rut.js"></script>`. Asumiendo que tu página tiene un `<input type="test" id="rut" name="rut" />`, donde el usuario escribe el rut, puedes formatear y validar su contenido incluyendo este código al final de tu página:
+```javascript
+<script>
+$(funciton() {
+    $("#rut").rut().on('rutValido', function(e, rut, dv) {
+        alert("El rut " + rut + "-" + dv + " es correcto");
+    }, { minimumLength: 7} );
+}
+</script>
+```
+
 ### Uso en input
 
 **Ejemplos.** Para probar la funcionalidad, descarga `jquery.rut.js` y `demo.html` en una misma carpeta y abre `demo.html`en un browser.
