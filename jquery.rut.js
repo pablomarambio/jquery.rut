@@ -87,7 +87,7 @@
 	function computeDv(rut) {
 		var suma	= 0;
 		var mul		= 2;
-		if(typeof(rut) !== 'number') return;
+		if(typeof(rut) !== 'number') { return; }
 		rut = rut.toString();
 		for(var i=rut.length -1;i >= 0;i--) {
 			suma = suma + rut.charAt(i) * mul;
@@ -137,13 +137,13 @@
 					if(that.opts.ignoreControlKeys && isControlKey(e)) { return; }
 					formatInput(that, that.opts.useThousandsSeparator);
 				});
-				that.opts.validateOn && that.on(that.opts.validateOn, function(e) {
+				that.opts.validateOn && that.on(that.opts.validateOn, function() {
 					validateInput(that);
 				});
 			}
 			return this;
 		}
-	}
+	};
 
 	$.fn.rut = function(methodOrOptions) {
 		if(methods[methodOrOptions]) {
@@ -153,20 +153,20 @@
 		} else {
 			$.error("El método " + methodOrOptions + " no existe en jQuery.rut");
 		}
-	}
+	};
 
 	$.formatRut = function (rut, useThousandsSeparator) {
-		if(useThousandsSeparator===undefined) useThousandsSeparator = true;
+		if(useThousandsSeparator===undefined) { useThousandsSeparator = true; }
 		return format(rut, useThousandsSeparator);
-	}
+	};
 
 	$.computeDv = function(rut){
 		var cleanRut = clearFormat(rut);
 		return computeDv( parseInt(cleanRut, 10) );
-	}
+	};
 
 	$.validateRut = function(rut, fn, options) {
-		var options = options || {};
+		options = options || {};
 		if(isValidRut(rut, options)) {
 			var rd = splitRutAndDv(rut);
 			$.isFunction(fn) && fn(rd[0], rd[1]);
@@ -174,5 +174,5 @@
 		} else {
 			return false;
 		}
-	}
+	};
 })(jQuery);
