@@ -31,11 +31,12 @@
 	//private methods
 	function clearFormat(value) {
 		return value.replace(/[\.\-]/g, "");
-	};
+	}
+
 	function format(value, useThousandsSeparator) {
-		rutAndDv = splitRutAndDv(value);
+		var rutAndDv = splitRutAndDv(value);
 		var cRut = rutAndDv[0]; var cDv = rutAndDv[1];
-		if(!(cRut && cDv)) return cRut || value;
+		if(!(cRut && cDv)) { return cRut || value; }
 		var rutF = "";
 		var thousandsSeparator = useThousandsSeparator ? "." : "";
 		while(cRut.length > 3) {
@@ -43,25 +44,27 @@
 			cRut = cRut.substring(0, cRut.length - 3);
 		}
 		return cRut + rutF + "-" + cDv;
-	};
+	}
+
 	function isControlKey(e) {
 		return e.type && e.type.match(/^key(up|down|press)/) &&
 			(
-				e.keyCode ==  8 || // del
-				e.keyCode == 16 || // shift
-				e.keyCode == 17 || // ctrl
-				e.keyCode == 18 || // alt
-				e.keyCode == 20 || // caps lock
-				e.keyCode == 27 || // esc
-				e.keyCode == 37 || // arrow
-				e.keyCode == 38 || // arrow
-				e.keyCode == 39 || // arrow
-				e.keyCode == 40 || // arrow
-				e.keyCode == 91    // command
+				e.keyCode ===  8 || // del
+				e.keyCode === 16 || // shift
+				e.keyCode === 17 || // ctrl
+				e.keyCode === 18 || // alt
+				e.keyCode === 20 || // caps lock
+				e.keyCode === 27 || // esc
+				e.keyCode === 37 || // arrow
+				e.keyCode === 38 || // arrow
+				e.keyCode === 39 || // arrow
+				e.keyCode === 40 || // arrow
+				e.keyCode === 91    // command
 			);
-	};
+	}
+
 	function isValidRut(rut, options) {
-		if(typeof(rut) !== 'string') return false;
+		if(typeof(rut) !== 'string') { return false; }
 		var cRut = clearFormat(rut);
 		// validar por largo mínimo, sin guiones ni puntos:
 		// x.xxx.xxx-x
@@ -77,9 +80,10 @@
 		}
 		var cDv = cRut.charAt(cRut.length - 1).toUpperCase();
 		var nRut = parseInt(cRut.substr(0, cRut.length - 1));
-		if(nRut === NaN) return false;
+		if(isNaN(nRut)){ return false; }
 		return computeDv(nRut).toString().toUpperCase() === cDv;
-	};
+	}
+
 	function computeDv(rut) {
 		var suma	= 0;
 		var mul		= 2;
@@ -94,25 +98,28 @@
 			case 0	: return 0;
 			default	: return 11 - (suma % 11);
 		}
-	};
-	function formatInput($input, useThousandsSeparator, e) {
+	}
+
+	function formatInput($input, useThousandsSeparator) {
 		$input.val(format($input.val(), useThousandsSeparator));
-	};
-	function validateInput($input, e) {
+	}
+
+	function validateInput($input) {
 		if(isValidRut($input.val(), $input.opts)) {
 			$input.trigger('rutValido', splitRutAndDv($input.val()));
 		} else {
 			$input.trigger('rutInvalido');
 		}
-	};
+	}
+
 	function splitRutAndDv(rut) {
 		var cValue = clearFormat(rut);
-		if(cValue.length == 0) return [null, null];
-		if(cValue.length == 1) return [cValue, null];
+		if(cValue.length === 0) { return [null, null]; }
+		if(cValue.length === 1) { return [cValue, null]; }
 		var cDv = cValue.charAt(cValue.length - 1);
 		var cRut = cValue.substring(0, cValue.length - 1);
 		return [cRut, cDv];
-	};
+	}
 
 	// public methods
 	var methods = {
@@ -127,16 +134,16 @@
 				var that = this;
 				that.opts = $.extend({}, defaults, options);
 				that.opts.formatOn && that.on(that.opts.formatOn, function(e) {
-					if(that.opts.ignoreControlKeys && isControlKey(e)) return;
-					formatInput(that, that.opts.useThousandsSeparator, e);
+					if(that.opts.ignoreControlKeys && isControlKey(e)) { return; }
+					formatInput(that, that.opts.useThousandsSeparator);
 				});
 				that.opts.validateOn && that.on(that.opts.validateOn, function(e) {
-					validateInput(that, e);
+					validateInput(that);
 				});
 			}
 			return this;
 		}
-	};
+	}
 
 	$.fn.rut = function(methodOrOptions) {
 		if(methods[methodOrOptions]) {
@@ -146,7 +153,7 @@
 		} else {
 			$.error("El método " + methodOrOptions + " no existe en jQuery.rut");
 		}
-	};
+	}
 
 	$.formatRut = function (rut, useThousandsSeparator) {
 		if(useThousandsSeparator===undefined) useThousandsSeparator = true;
