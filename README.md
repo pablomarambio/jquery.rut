@@ -1,6 +1,6 @@
 ## jQuery.rut [![Code Climate](https://codeclimate.com/github/pablomarambio/jquery.rut.png)](https://codeclimate.com/github/pablomarambio/jquery.rut) [![TravisCI](https://travis-ci.org/pablomarambio/jquery.rut.svg?branch=master)](https://travis-ci.org/pablomarambio/jquery.rut/)
 
-Plugin de jQuery para formateo y validación de RUTs.
+Plugin de jQuery para formateo y validación de RUTs. Puede validar y decorar el rut *en vivo*, mientras se escribe. Testeado en distintos browsers [de forma automática](https://travis-ci.org/pablomarambio/jquery.rut/).
 
 ### Uso en input
 
@@ -113,7 +113,7 @@ $.validateRut("1-9", function(r, dv) {
 
 **Patches.** Si quieres incluir un cambio tú mismo, eres bienvenido! Simplemente [crea un pull request](https://github.com/pablomarambio/jquery.rut/pulls). 
 
-**Tests.** El repositorio cuenta con más de 40 tests que se corren de manera automática en Safari, Firefox y Chrome. Para correrlos, haz:
+**Tests.** El repositorio cuenta con más de 50 tests que se corren de manera automática en Safari, Firefox y Chrome. Para correrlos, haz:
 ```sh
 npm install
 npm test
