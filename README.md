@@ -6,7 +6,7 @@ Plugin de jQuery para formateo y validación de RUTs. Puede validar y decorar el
 Baja el archivo `jquery.rut.js` y déjalo en la raíz de tu proyecto. Linkéalo a tu html pegando esto en el head: `<script src="jquery.rut.js"></script>`. Asumiendo que tu página tiene un `<input type="test" id="rut" name="rut" />`, donde el usuario escribe el rut, puedes formatear y validar su contenido incluyendo este código al final de tu página:
 ```javascript
 <script>
-$(funciton() {
+$(function() {
     $("#rut").rut().on('rutValido', function(e, rut, dv) {
         alert("El rut " + rut + "-" + dv + " es correcto");
     }, { minimumLength: 7} );
