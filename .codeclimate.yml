@@ -3,10 +3,10 @@ exclude_paths:
   - test/*
   - lib/*
   - resources/*
-  - **.yml
-  - **.md
-  - **.json
-  - **.html
+  - "**.yml"
+  - "**.md"
+  - "**.json"
+  - "**.html"
   - Gruntfile.js
   - .gitignore
   - LICENSE
