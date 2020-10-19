@@ -30,7 +30,7 @@
 
 	//private methods
 	function clearFormat(value) {
-		return value.replace(/[\.\-]/g, "");
+		return value.replace(/[\.\-\_]/g, "");
 	}
 
 	function format(value, useThousandsSeparator) {
